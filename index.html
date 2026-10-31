@@ -1,0 +1,370 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>東京家庭自由行手冊</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap">
+<style>
+/* Layout concept: a Tokyo station-signage handbook. Each day is one subway line in its real colour; every move is drawn as a ride segment with fare and a Google Maps route button. */
+:root {
+  --bg: #EEF1F3;
+  --paper: #FFFFFF;
+  --ink: #13202B;
+  --muted: #566774;
+  --rule: #D3DBE0;
+  --sign: #0E2A47;
+  --sign-ink: #FFFFFF;
+  --sign-muted: #A9BCD0;
+  --link: #0B5CAD;
+  --est-bg: #FFF1D6;
+  --est-ink: #8A5200;
+  --ok-bg: #E3F3E7;
+  --ok-ink: #1C6B34;
+  --warn-bg: #FCE4E1;
+  --warn-ink: #9B2A1D;
+  --chip: #E4EAEE;
+  --line-d1: #4E9F3D;
+  --line-d2: #F39700;
+  --line-d3: #FFD400;
+  --line-d4: #8F76D6;
+  --line-d5: #E85298;
+  --on-d1: #FFFFFF;
+  --on-d2: #1A1200;
+  --on-d3: #1A1600;
+  --on-d4: #FFFFFF;
+  --on-d5: #FFFFFF;
+  --f-display: "Zen Kaku Gothic New", "Noto Sans TC", "Hiragino Kaku Gothic ProN", "PingFang TC", sans-serif;
+  --f-body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B141C; --paper: #14212C; --ink: #E6EDF2; --muted: #93A4B1; --rule: #263644;
+    --sign: #0A2038; --sign-ink: #FFFFFF; --sign-muted: #8EA6BE; --link: #7DB8F2;
+    --est-bg: #3A2B10; --est-ink: #F2B25C; --ok-bg: #12301D; --ok-ink: #7FD79A;
+    --warn-bg: #3C1A16; --warn-ink: #F29B90; --chip: #1E2F3C;
+    --line-d1: #6BBE58; --line-d4: #A790EE;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B141C; --paper: #14212C; --ink: #E6EDF2; --muted: #93A4B1; --rule: #263644;
+  --sign: #0A2038; --sign-ink: #FFFFFF; --sign-muted: #8EA6BE; --link: #7DB8F2;
+  --est-bg: #3A2B10; --est-ink: #F2B25C; --ok-bg: #12301D; --ok-ink: #7FD79A;
+  --warn-bg: #3C1A16; --warn-ink: #F29B90; --chip: #1E2F3C;
+  --line-d1: #6BBE58; --line-d4: #A790EE;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--f-body); font-size: 15px; line-height: 1.65;
+  padding-block: 0 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--sign); }
+a { color: var(--link); }
+.wrap { max-width: 720px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.25; }
+p { margin: 0; }
+.mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+
+/* masthead */
+.mast { background: var(--sign); color: var(--sign-ink); margin-inline: calc(max(16px, env(safe-area-inset-left, 0px)) * -1) calc(max(16px, env(safe-area-inset-right, 0px)) * -1); padding: 28px max(16px, env(safe-area-inset-right, 0px)) 26px max(16px, env(safe-area-inset-left, 0px)); }
+.mast .wrap { display: grid; gap: 18px; }
+.kicker { font-family: var(--f-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--sign-muted); }
+.mast h1 { font-size: clamp(30px, 8vw, 44px); font-weight: 900; letter-spacing: .02em; }
+.mast .sub { color: var(--sign-muted); font-size: 14px; }
+.route { position: relative; display: flex; justify-content: space-between; padding-top: 6px; margin-top: 4px; }
+.route::before { content: ""; position: absolute; left: 18px; right: 18px; top: 24px; height: 6px; background: linear-gradient(90deg, var(--line-d1), var(--line-d2), var(--line-d3), var(--line-d4), var(--line-d5)); border-radius: 3px; }
+.stn { position: relative; display: grid; justify-items: center; gap: 6px; text-decoration: none; color: inherit; min-width: 0; }
+.stn .dot { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; font-family: var(--f-display); font-weight: 900; font-size: 16px; border: 4px solid var(--sign); box-shadow: 0 0 0 2px #fff; }
+.stn small { font-size: 11px; color: var(--sign-muted); text-align: center; line-height: 1.3; }
+.stn:focus-visible { outline: 2px solid #fff; outline-offset: 4px; border-radius: 8px; }
+
+/* sticky day nav */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--sign); margin-inline: calc(max(16px, env(safe-area-inset-left, 0px)) * -1) calc(max(16px, env(safe-area-inset-right, 0px)) * -1); padding: 8px max(16px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px)); border-top: 1px solid rgba(255,255,255,.12); }
+.nav .wrap { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+.nav a { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; color: var(--sign-ink); text-decoration: none; font-size: 13px; padding: 4px 12px 4px 4px; border-radius: 99px; background: rgba(255,255,255,.1); }
+.nav a b { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font-family: var(--f-display); font-size: 13px; }
+.nav a:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+section { margin-top: 28px; }
+.sec-h { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.badge { flex: 0 0 auto; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-family: var(--f-display); font-weight: 900; font-size: 22px; }
+.sec-h h2 { font-size: 20px; }
+.sec-h .date { font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+
+.card { background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; padding: 14px 16px; }
+.grid2 { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.card h3 { font-size: 16px; margin-bottom: 6px; }
+.fl { display: grid; gap: 4px; }
+.fl .big { font-family: var(--f-mono); font-size: 20px; font-weight: 500; }
+.price { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+
+/* timeline */
+.tl { list-style: none; margin: 0; padding: 0; position: relative; }
+.tl > li { position: relative; padding-left: 28px; padding-bottom: 14px; }
+.tl > li::before { content: ""; position: absolute; left: 8px; top: 0; bottom: 0; width: 5px; background: var(--dayc); }
+.tl > li:last-child::before { bottom: 50%; }
+.stop::after { content: ""; position: absolute; left: 3px; top: 16px; width: 15px; height: 15px; border-radius: 50%; background: var(--paper); border: 4px solid var(--dayc); }
+.stop .card { padding: 12px 14px; }
+.stop .top { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.t { font-family: var(--f-mono); font-weight: 500; font-size: 13px; background: var(--chip); border-radius: 5px; padding: 1px 7px; }
+.nm { font-weight: 700; font-size: 15.5px; min-width: 0; overflow-wrap: anywhere; }
+.note { color: var(--muted); font-size: 13.5px; margin-top: 4px; }
+.row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; align-items: center; }
+.tag { font-size: 12px; padding: 1px 8px; border-radius: 99px; background: var(--chip); }
+.tag.food { background: var(--est-bg); color: var(--est-ink); }
+.tag.warn { background: var(--warn-bg); color: var(--warn-ink); font-weight: 500; }
+.fare { font-family: var(--f-mono); font-size: 12.5px; padding: 1px 8px; border-radius: 6px; background: var(--ok-bg); color: var(--ok-ink); }
+.fare.est { background: var(--est-bg); color: var(--est-ink); }
+.btn { display: inline-flex; align-items: center; min-height: 32px; font-size: 13px; padding: 2px 12px; border-radius: 99px; border: 1px solid var(--link); color: var(--link); text-decoration: none; background: transparent; }
+.btn:hover { background: var(--chip); }
+.btn:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+.btn.solid { background: var(--link); color: var(--paper); }
+
+.move { padding-left: 28px; padding-bottom: 14px; }
+.move::after { content: ""; position: absolute; left: 4px; top: 6px; width: 13px; height: 13px; background: var(--paper); border: 3px solid var(--dayc); border-radius: 3px; transform: rotate(45deg) scale(.8); }
+.move .mv { border: 1px dashed var(--rule); border-radius: 10px; padding: 10px 14px; background: color-mix(in srgb, var(--paper) 60%, transparent); }
+.move .how { font-size: 14px; font-weight: 500; }
+.move .path { font-size: 13px; color: var(--muted); }
+.alt { font-size: 12.5px; color: var(--muted); margin-top: 6px; border-top: 1px dashed var(--rule); padding-top: 6px; }
+
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 460px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-size: 12px; color: var(--muted); font-weight: 500; letter-spacing: .04em; }
+td.num, th.num { text-align: right; font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+tfoot td { font-weight: 700; border-bottom: 0; }
+
+.callout { border-radius: 10px; padding: 12px 14px; font-size: 14px; }
+.callout.warn { background: var(--warn-bg); color: var(--warn-ink); }
+.callout.est { background: var(--est-bg); color: var(--est-ink); }
+.callout ul { margin: 6px 0 0; padding-left: 20px; }
+.callout b { font-weight: 700; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 12.5px; color: var(--muted); }
+.src { font-size: 12.5px; color: var(--muted); }
+.src li { margin-top: 2px; overflow-wrap: anywhere; }
+footer { margin-top: 32px; text-align: center; font-size: 12px; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+
+<header class="mast">
+  <div class="wrap">
+    <div class="kicker">Tokyo Family Trip · 2027.01.21 – 01.25</div>
+    <h1>東京五天四夜<br>家庭自由行</h1>
+    <p class="sub">8 大 1 小 · 住押上 TOKYO MOON HOUSE · 每天一條線，路線與票價都附在站與站之間</p>
+    <nav class="route" aria-label="五天總覽" id="route"></nav>
+  </div>
+</header>
+
+<nav class="nav" aria-label="跳到某一天"><div class="wrap" id="nav"></div></nav>
+
+<main class="wrap">
+
+<section id="overview">
+  <div class="sec-h"><h2>機票與住宿</h2></div>
+  <div class="grid2">
+    <div class="card fl">
+      <h3>去程 · 台灣虎航 IT280</h3>
+      <div class="big">KHH 08:00 → NRT 12:10</div>
+      <p class="note">1/21（四）· 飛行約 3 小時 10 分</p>
+      <p class="note">訂票畫面價格 <span class="price">TWD 15,849</span> / 人</p>
+    </div>
+    <div class="card fl">
+      <h3>回程 · 台灣虎航 IT281</h3>
+      <div class="big">NRT 11:25 → KHH 15:05</div>
+      <p class="note">1/25（一）· 飛行約 4 小時 40 分</p>
+      <p class="note">訂票畫面價格 <span class="price">TWD 11,849</span> / 人</p>
+    </div>
+    <div class="card fl" style="grid-column: 1 / -1;">
+      <h3>住宿 · TOKYO MOON HOUSE（押上一帶）</h3>
+      <p class="note">連住四晚：1/21、1/22、1/23、1/24。訂票畫面顯示 9 位大人總額 <span class="price">TWD 273,492</span>，是否含行李或其他加購請以訂單為準。</p>
+      <div class="row"><a class="btn solid" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=TOKYO%20MOON%20HOUSE%20%E6%8A%BC%E4%B8%8A">Google 地圖</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="how"></section>
+
+<div id="days"></div>
+
+<section id="costs">
+  <div class="sec-h"><h2>交通費總覽（每位大人）</h2></div>
+  <div class="card table-wrap">
+    <table>
+      <thead><tr><th>日期</th><th>內容</th><th class="num">日圓</th></tr></thead>
+      <tbody>
+        <tr><td>1/21</td><td>成田→押上 ¥1,162；押上→新宿 ¥260；新宿→押上 約 ¥430</td><td class="num">約 1,852</td></tr>
+        <tr><td>1/22</td><td>押上→淺草 約 ¥180；淺草→末廣町 ¥178；→表參道 約 ¥209；→押上 約 ¥252</td><td class="num">約 819</td></tr>
+        <tr><td>1/23</td><td>押上→新宿 ¥260；新宿→押上 約 ¥430</td><td class="num">約 690</td></tr>
+        <tr><td>1/24</td><td>押上↔東京站（半藏門線）約 ¥209 × 2</td><td class="num">約 418</td></tr>
+        <tr><td>1/25</td><td>押上→成田 ¥1,162</td><td class="num">1,162</td></tr>
+      </tbody>
+      <tfoot><tr><td colspan="2">合計</td><td class="num">約 4,941</td></tr></tfoot>
+    </table>
+    <p class="note" style="margin-top:8px;">小學生以下票價約為半價。表參道延伸行程、Klook 團費、餐費與購物不含在內。</p>
+  </div>
+</section>
+
+<section id="tips">
+  <div class="sec-h"><h2>出發前確認</h2></div>
+  <div class="grid2">
+    <div class="callout warn">
+      <b>鋰電池與刀片</b>
+      <ul>
+        <li>調理機主機、智慧指環、PS5 手把、行動電源一律隨身登機。</li>
+        <li>調理機不鏽鋼刀片放託運行李。</li>
+        <li>虎航託運額度依票價與加購而定，先確認每人公斤數。</li>
+      </ul>
+    </div>
+    <div class="callout est">
+      <b>免稅新制（2026/11/1 起）</b>
+      <ul>
+        <li>改為先付含稅價，出境安檢前由海關確認商品後退稅，退到事先登記的信用卡等支付工具。</li>
+        <li>未稅金額合計達 ¥5,000 以上可申請，不再分一般與消耗品。</li>
+        <li>機場可用 Visit Japan Web 在手機辦理。行前請確認各店與自己的信用卡是否適用。</li>
+      </ul>
+    </div>
+  </div>
+  <p class="note" style="margin-top:10px;">秋葉原部分店家與中古玩具店只收現金，大團體請多準備現鈔。</p>
+</section>
+
+<section>
+  <h3 style="font-size:14px;margin-bottom:6px;">資料來源</h3>
+  <ul class="src">
+    <li><a target="_blank" rel="noopener" href="https://www.keisei.co.jp/keisei/tetudou/skyliner/tc/traffic/express_fares.php">京成電鐵 Access 特快票價表</a>（成田機場→押上 ¥1,170，IC ¥1,162，兒童 ¥590）</li>
+    <li><a target="_blank" rel="noopener" href="https://www.tokyometro.jp/tcn/ticket/types/regular/index.html">東京 Metro 普通乘車券</a>（IC 卡按里程：1–6 km ¥178、7–11 km ¥209、12–19 km ¥252）</li>
+    <li><a target="_blank" rel="noopener" href="https://ekitan.com/transit/fare/sf-3077/st-9596">乘換案內 ekitan</a>（2026/10/31 查詢，三越前→北參道 IC ¥209）</li>
+    <li><a target="_blank" rel="noopener" href="https://cdnfinance.technews.tw/2026/10/23/japan-tax-free-system-changes-refund-model-november-pay-tax-inclusive-departure-refund">TechNews 日本免稅制度改為退稅制</a></li>
+    <li>其餘行程、營業時間與機票價格取自你提供的行程 PDF 與原手冊。</li>
+  </ul>
+</section>
+
+<footer>營業時間、優惠與票價可能變動，出發前請再用 Google 地圖與店家官網確認。</footer>
+</main>
+
+<script>
+(function () {
+  var enc = encodeURIComponent;
+  function mapUrl(q) { return 'https://www.google.com/maps/search/?api=1&query=' + enc(q); }
+  function dirUrl(o, d) { return 'https://www.google.com/maps/dir/?api=1&origin=' + enc(o) + '&destination=' + enc(d) + '&travelmode=transit'; }
+
+  var DAYS = [
+    { id: 'day1', n: 1, date: '1/21（四）', title: '抵達東京 · 新宿購物', short: '新宿', line: '都營新宿線綠', items: [
+      { t: '12:10', name: '抵達成田機場', note: '入境、領行李，買 Suica 或在手機加入 Suica。', q: 'Narita International Airport' },
+      { mv: 1, how: '京成 Access 特快直達押上', path: '成田機場 → 押上站', dur: '約 60 分', fare: '¥1,162（IC）', fk: 'ok', extra: '紙票 ¥1,170，兒童 ¥590。', o: 'Narita Airport Station', d: '押上站' },
+      { t: '14:30', name: 'TOKYO MOON HOUSE 入住', note: '放行李，休息一下再出發。', q: 'TOKYO MOON HOUSE 押上' },
+      { mv: 1, how: 'JR 中央・總武線（各站停車）', path: '步行約 17 分到錦糸町站 → 新宿站', dur: '約 20 分搭車', fare: '¥260', fk: 'ok', extra: '行程 PDF 原案。不想走路可改搭地鐵：半藏門線到九段下，轉都營新宿線到新宿三丁目，約 ¥430（估）。', o: '錦糸町駅', d: '新宿駅' },
+      { t: '15:45', name: '分組自由逛（各自選擇，同時進行）', note: '到新宿後各組分頭行動，想買什麼就去哪家，約 19:00 在一蘭門口集合。店家都在新宿三丁目一帶，步行幾分鐘內。<br><b>Sanrio Gift Gate</b>：紀伊國屋書店新宿本店 1F 名店街，10:00–20:00，最早打烊。<br><b>3COINS</b>：LUMINE EST 3F，平日 11:00–21:00。<br><b>ABC-MART GRAND STAGE</b>：同棟 LUMINE EST 6F，營業時間以現場為準。<br><b>無印良品 新宿通店</b>：新宿 3-17-1 Isamiya 大樓 B1–3F，10:00–21:00。<br><b>GOLF5 / Alpen TOKYO</b>：新宿 3-23-7 Unica 大樓，6–7F 高爾夫，平日 11:00–22:00；1–2F 可免費 3D 掃腳型，買大人籃球鞋與 12 歲孩子的運動鞋，不限品牌。<br><b>前開式行李箱</b>：到 Bic Camera 新宿東口店（10:00–22:00）找前開式款，LOJEL 是首選，掀開蓋子就能直接取放，在民宿很好用。樓層與庫存以現場為準，拆封後搭地鐵帶回民宿，第二天裝戰利品用。建議最後再買，避免拖著逛其他店。若這裡沒有想要的尺寸，第二天秋葉原 Bic Camera 7F 可以補買。', tags: [['', '高爾夫'], ['', '無印'], ['', '前開式行李箱'], ['', '3COINS'], ['', '球鞋'], ['', '各有所需']], q: '', links: [['Sanrio Gift Gate', 'Sanrio Gift Gate 新宿'], ['3COINS', '3COINS LUMINE EST 新宿'], ['ABC-MART', 'ABC-MART GRAND STAGE 新宿ルミネエスト'], ['無印良品', '無印良品 新宿通店'], ['GOLF5 / Alpen', 'Alpen TOKYO 新宿 GOLF5 FLAGSHIP'], ['Bic Camera 前開式行李箱', 'ビックカメラ 新宿東口店']] },
+      { t: '19:15', name: '一蘭 新宿中央東口店', note: 'Peace 大樓 B1F，24 小時營業。晚餐。', tags: [['food', '拉麵 約 ¥1,200–1,500 / 碗（估）']], q: '一蘭 新宿中央東口店' },
+      { t: '20:00', name: 'UNIQLO 新宿本店 ＆ Bic Camera 新宿東口店', note: '新宿 3-29-1，兩家都營業到 22:00。UNIQLO 買發熱衣與輕羽絨，一樓是 Bic Camera。', tags: [['', '服飾'], ['', '電器']], q: 'UNIQLO 新宿本店' },
+      { t: '21:00', name: '堂吉訶德 新宿東南口店', note: '新宿 3-36-16，24 小時營業。藥妝、零食最後一站，出示優惠券。', tags: [['', '藥妝 / 零食']], q: 'ドン・キホーテ 新宿東南口店' },
+      { mv: 1, how: '都營新宿線 → 半藏門線', path: '新宿三丁目 → 九段下（轉乘）→ 押上', dur: '約 35 分', fare: '約 ¥430', fk: 'est', extra: '末班車時間足夠，提著戰利品回民宿比走回錦糸町輕鬆。', o: '新宿三丁目駅', d: '押上駅' },
+      { t: '22:00', name: '民宿附近超市：牛奶、草莓、蜜柑', note: '回到押上順路買明天早餐用的牛奶，加上草莓與蜜柑。一月正是草莓盛產期。超市營業到幾點依店家而不同，建議到站前先用 Google 地圖看營業中的店。', tags: [['food', '牛奶 / 草莓 / 蜜柑'], ['warn', '先查營業時間']], q: 'スーパー 押上駅 周辺' }
+    ] },
+    { id: 'day2', n: 2, date: '1/22（五）', title: '購物組：淺草 · 秋葉原 · 表參道', short: '淺草秋葉原', line: '銀座線橘', items: [
+      { t: '08:05', name: '押上出發', note: '這組不跟團。先到淺草，趁人少拍照，下午把戰利品寄放在表參道站，兩手空空逛原宿。行李箱第一天已買好，放在民宿。', q: '押上駅' },
+      { mv: 1, how: '都營淺草線', path: '押上 → 淺草站（2 站）A4 出口', dur: '約 3 分', fare: '約 ¥180', fk: 'est', o: '押上駅', d: '浅草駅 A4出口' },
+      { t: '08:20', name: '淺草寺・雷門', note: '雷門大燈籠人少的時候拍全家福，參拜、求觀音籤。10:00 轉進傳法院通，現烤淺草花月堂菠蘿麵包，加上扇屋玉子燒現吃。', tags: [['food', '點心 約 ¥1,000 / 人（估）']], q: '雷門 浅草寺' },
+      { t: '10:40', name: '淺草文化觀光中心 8F', note: '雷門對面，免費展望台，鳥瞰淺草全景。看完在雷門旁搭銀座線。', tags: [['', '免費']], q: '浅草文化観光センター' },
+      { mv: 1, how: '東京 Metro 銀座線', path: '淺草 → 末廣町（約 5 站）3 號出口', dur: '約 10 分', fare: '¥178', fk: 'ok', extra: 'IC 屬 1–6 km 級距。11:03 左右上車，11:15 到站。', o: '浅草駅', d: '末広町駅 3番出口' },
+      { t: '11:30', name: 'HAMA 壽司 秋葉原電氣街口店', note: '站前大樓 3F，座位大、中文平板點餐，可刷卡不用湊現鈔。推薦炙燒起司美乃滋玉子燒、茶碗蒸、炸薯條。', tags: [['food', '午餐 人均 約 ¥1,500（估）']], q: 'はま寿司 秋葉原電気街口店' },
+      { t: '12:45', name: 'Bic Camera AKIBA', note: '刷 10%+7% 優惠券買 récolte 無線調理機 RCP-7、運動指環、PS5 手把。iRobot（Roomba）補充配件如濾網、邊刷、滾刷、集塵袋也在這裡找，先拍好家裡掃地機的型號再比對，日本版與台灣版配件不一定通用。', tags: [['', '調理機'], ['', 'iRobot 配件'], ['warn', '含鋰電池要隨身']], q: 'Bic Camera AKIBA' },
+      { t: '13:45', name: '無線電會館 ＆ 駿河屋 ＆ 扭蛋', note: '用店家提袋裝，《葬送的芙莉蓮》、《紫羅蘭永恆花園》、Minecraft 週邊與大扭蛋集中裝袋。部分店家只收現金。運動指環也可以比較 Yodobashi-Akiba 2F，滑鼠墊在 Bic Camera 2F。iRobot 配件若 Bic Camera 缺貨，可再到 Yodobashi-Akiba 看。若要買 Roomba 替換電池，屬鋰電池，必須隨身登機。', tags: [['', '動漫週邊'], ['warn', '帶現金']], q: '秋葉原 駿河屋 アキバ' },
+      { mv: 1, how: '銀座線直達表參道', path: '末廣町 → 表參道（免轉車）', dur: '約 25 分', fare: '約 ¥209', fk: 'est', extra: '15:00 出發。出站後立刻把裝滿電器與公仔的袋子鎖進表參道站的大型投幣置物櫃，準備好零錢。若想拖著行李箱逛秋葉原，也可以從民宿帶出門，但淺草早上會多一份負擔。', o: '末広町駅', d: '表参道駅' },
+      { t: '15:30', name: '表參道之丘 → 原宿旗艦店散步', note: '先看安藤忠雄設計的表參道之丘，再沿大馬路逛：New Balance 原宿旗艦店（4 層樓，3D 量腳型）、3COINS+plus 原宿本店（全日本最大）、UNIQLO 原宿店看聯名 UT。', tags: [['', '球鞋'], ['', '3COINS'], ['', 'UT']], q: '表参道ヒルズ', links: [['New Balance 原宿', 'New Balance Harajuku'], ['3COINS+plus 原宿本店', '3COINS+plus 原宿本店'], ['UNIQLO 原宿店', 'UNIQLO 原宿店']] },
+      { t: '19:30', name: '取回行李，回押上', note: '表參道站取回寄放的袋子，搭半藏門線往押上方向，免轉車一路坐到站。', q: '表参道駅' },
+      { mv: 1, how: '半藏門線直達押上', path: '表參道 → 押上（免轉車）', dur: '約 35 分', fare: '約 ¥252', fk: 'est', extra: '表參道到押上約 15 km，屬 IC 12–19 km 級距。', o: '表参道駅', d: '押上駅' }
+    ] },
+    { id: 'day3', n: 3, date: '1/23（六）', title: 'Klook 滑雪一日團', short: '滑雪', line: '中央・總武線黃', items: [
+      { mv: 1, how: 'JR 中央・總武線', path: '押上步行約 17 分到錦糸町站 → 新宿站', dur: '約 20 分搭車', fare: '¥260', fk: 'ok', extra: '建議 06:30 出發，07:10 前到新宿。', o: '錦糸町駅', d: '新宿駅' },
+      { t: '07:20', name: '新宿站 20 號出口集合', note: '新宿 L Tower（新宿エルタワー）。160-0023 東京都新宿區西新宿 1-6-1。出口有 PLAZA 招牌。', q: '新宿エルタワー' },
+      { t: '10:30', name: 'Fujiyama Snow Resort Yeti', note: '領租借裝備後開始 1.5 小時雙板團體課程，每團最多 20 人。只有雙板，沒有單板課程。', tags: [['', '團費已預付']], q: 'Fujiyama Snow Resort Yeti' },
+      { t: '12:30', name: '午餐自理', note: '雪場自由活動。', tags: [['food', '約 ¥1,000–1,800 / 人（估）']], q: '' },
+      { t: '15:30', name: '集合、歸還裝備', note: '15:45 搭巴士回新宿。', q: '' },
+      { t: '18:00', name: '回到新宿站', note: '先吃晚餐再買蛋糕，一起回押上慶生。', q: '新宿駅' },
+      { t: '18:15', name: '晚餐：Katsukura 豬排（大人）／壽司（小朋友）', note: '大人吃豬排。室內有等候區，白飯、高麗菜絲、味噌湯可續加。小朋友想吃壽司的話，可以分兩組：一組在這裡吃豬排，另一組就近找迴轉壽司，吃完 19:40 在 HARBS 會合。', tags: [['food', '豬排 人均 約 ¥2,000–3,000（估）'], ['food', '小朋友壽司 約 ¥1,500（估）']], q: 'かつくら 新宿髙島屋', links: [['新宿附近迴轉壽司', '回転寿司 新宿駅']] },
+      { t: '19:40', name: 'HARBS LUMINE EST 新宿店 B2', note: '直接走外帶專屬櫃檯，買草莓鮮奶油生日蛋糕。附保冷劑，手提不要壓。', tags: [['food', '整顆蛋糕 約 ¥6,000（估）']], q: 'HARBS ルミネエスト新宿' },
+      { mv: 1, how: '都營新宿線 → 半藏門線', path: '新宿三丁目 → 九段下（轉乘）→ 押上', dur: '約 35 分', fare: '約 ¥430', fk: 'est', o: '新宿三丁目駅', d: '押上駅' }
+    ] },
+    { id: 'day4', n: 4, date: '1/24（日）', title: 'Klook 富士山一日團', short: '富士山', line: '半藏門線紫', items: [
+      { t: '07:00', name: '出發去集合點', note: '集合點尚待討論。兩個選項如下，請提前 10 分鐘到。', tags: [['warn', '待決定']], q: '', links: [['08:00 東京新丸之內大廈', '新丸の内ビルディング 東京'], ['08:30 新宿 i-Land Tower（LOVE 雕塑前）', '新宿アイランドタワー LOVE']] },
+      { mv: 1, how: '半藏門線（去東京站集合）', path: '押上 → 大手町，步行到新丸之內大廈', dur: '搭車約 20 分 + 步行約 10 分', fare: '約 ¥209', fk: 'est', extra: '去新宿 i-Land Tower：JR 錦糸町→新宿 ¥260，再步行約 8 分。', o: '押上駅', d: '新丸の内ビルディング' },
+      { t: '10:00', name: '新倉山淺間公園', note: '忠靈塔與富士山，停留 1 小時。', q: '新倉山浅間公園' },
+      { t: '11:00', name: '日川時計店', note: '停留 30 分鐘。', q: '日川時計店' },
+      { t: '11:30', name: '下吉田站 → 河口湖站小火車', note: '停留 20 分鐘，贈送小火車票。電車異常時取消小火車，改乘車前往。', q: '下吉田駅' },
+      { t: '12:00', name: 'Lawson 河口湖站前打卡點', note: '停留 20 分鐘。富士山限定零食等伴手禮以小件為主。', tags: [['food', '午餐自理 約 ¥1,200（估）']], q: 'ローソン 河口湖駅前' },
+      { t: '12:30', name: '河口湖纜車', note: '約 2 小時。纜車停運改搭天晴號遊船，都停運則改河口湖大石公園漫步。', q: '富士山パノラマロープウェイ' },
+      { t: '15:00', name: '山中湖餵天鵝', note: '停留 30 分鐘。', q: '山中湖 白鳥' },
+      { t: '18:00', name: '回程', note: '18:00 到新宿 i-Land Tower，18:30 到東京站新丸之內大廈 BEAMS 門口。時間看路況，不要預約晚餐、趕飛機或新幹線。', q: '新宿アイランドタワー' },
+      { mv: 1, how: '半藏門線回押上', path: '大手町 → 押上', dur: '約 20 分', fare: '約 ¥209', fk: 'est', o: '大手町駅', d: '押上駅' },
+      { t: '20:30', name: '晴空塔 Solamachi 最後補貨', note: '就在民宿旁，商場多數營業到 21:00。LOFT（3F East Yard）買文具手帳，Chiikawa Land 買周邊。回民宿後秤行李。', tags: [['', '文具'], ['', 'Chiikawa']], q: '東京ソラマチ' }
+    ] },
+    { id: 'day5', n: 5, date: '1/25（一）', title: '成田機場 · 返台', short: '返台', line: '淺草線粉紅', items: [
+      { t: '06:30', name: '起床、整理行李', note: '確認護照、機票、購物收據。鋰電池物品都放在隨身行李。', q: '' },
+      { mv: 1, how: '京成 Access 特快', path: '押上 → 成田機場', dur: '約 60 分', fare: '¥1,162（IC）', fk: 'ok', extra: '07:00–07:30 之間出發，約 08:30 抵達。紙票 ¥1,170，兒童 ¥590。', o: '押上駅', d: 'Narita Airport Station' },
+      { t: '08:30', name: '報到、機場最後伴手禮', note: '各店營業時間依航廈與店家而不同，以機場現場公告為準。', tags: [['warn', '免稅走新制：安檢前辦退稅']], q: 'Narita International Airport' },
+      { t: '11:25', name: '台灣虎航 IT281 起飛', note: '成田 NRT → 高雄 KHH，預計 15:05 抵達。', q: '' }
+    ] }
+  ];
+
+  var COLORS = ['d1', 'd2', 'd3', 'd4', 'd5'];
+
+  function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+
+  /* masthead route + nav */
+  var route = document.getElementById('route');
+  var nav = document.getElementById('nav');
+  DAYS.forEach(function (d, i) {
+    var c = COLORS[i];
+    var a = el('a', 'stn');
+    a.href = '#' + d.id;
+    a.innerHTML = '<span class="dot" style="background:var(--line-' + c + ');color:var(--on-' + c + ')">' + d.n + '</span><small>' + d.short + '<br>' + d.date.slice(0, 4) + '</small>';
+    route.appendChild(a);
+    var b = el('a');
+    b.href = '#' + d.id;
+    b.innerHTML = '<b style="background:var(--line-' + c + ');color:var(--on-' + c + ')">' + d.n + '</b>' + d.short;
+    nav.appendChild(b);
+  });
+
+  /* legend */
+  var how = document.getElementById('how');
+  how.innerHTML = '<div class="legend"><span class="fare">已查證</span><span>成田↔押上取自京成官網，JR 錦糸町→新宿取自你的行程 PDF</span><span class="fare est">估</span><span>依 Metro 里程級距推算，實際以 Suica 扣款與 Google 地圖為準</span></div>';
+
+  /* days */
+  var host = document.getElementById('days');
+  DAYS.forEach(function (d, i) {
+    var c = COLORS[i];
+    var s = el('section'); s.id = d.id;
+    s.style.setProperty('--dayc', 'var(--line-' + c + ')');
+    var h = el('div', 'sec-h');
+    h.innerHTML = '<span class="badge" style="background:var(--line-' + c + ');color:var(--on-' + c + ')">' + d.n + '</span><div><h2>' + d.title + '</h2><div class="date">' + d.date + ' · ' + d.line + '</div></div>';
+    s.appendChild(h);
+    var ul = el('ul', 'tl');
+    d.items.forEach(function (it) {
+      var li = el('li');
+      if (it.mv) {
+        li.className = 'move';
+        var inner = '<div class="mv"><div class="how">' + it.how + '</div><div class="path">' + it.path + '　' + it.dur + '</div><div class="row"><span class="fare' + (it.fk === 'est' ? ' est' : '') + '">' + (it.fk === 'est' ? '估 ' : '') + it.fare + '</span><a class="btn solid" target="_blank" rel="noopener" href="' + dirUrl(it.o, it.d) + '">Google 地圖路線</a></div>' + (it.extra ? '<div class="alt">' + it.extra + '</div>' : '') + '</div>';
+        li.innerHTML = inner;
+      } else {
+        li.className = 'stop';
+        var tags = (it.tags || []).map(function (t) { return '<span class="tag ' + t[0] + '">' + t[1] + '</span>'; }).join('');
+        var btns = '';
+        if (it.q) btns += '<a class="btn" target="_blank" rel="noopener" href="' + mapUrl(it.q) + '">地圖</a>';
+        (it.links || []).forEach(function (l) { btns += '<a class="btn" target="_blank" rel="noopener" href="' + mapUrl(l[1]) + '">' + l[0] + '</a>'; });
+        li.innerHTML = '<div class="card"><div class="top"><span class="t">' + it.t + '</span><span class="nm">' + it.name + '</span></div>' + (it.note ? '<p class="note">' + it.note + '</p>' : '') + ((tags || btns) ? '<div class="row">' + tags + btns + '</div>' : '') + '</div>';
+      }
+      ul.appendChild(li);
+    });
+    s.appendChild(ul);
+    host.appendChild(s);
+  });
+})();
+</script>
+
+</body></html>
