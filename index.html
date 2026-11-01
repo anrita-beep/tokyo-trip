@@ -74,9 +74,41 @@ const host=document.getElementById('days');days.forEach((d,i)=>{let s=document.c
 <p><strong>18:00–19:15 HAMA 壽司晚餐（3 人）：</strong>安排秋葉原電氣街口店（BiTO AKIBA PLAZA 3F）作為目標店，晚餐抓 60–75 分鐘。HAMA 日本店不提供傳統保留座位，但可用官方 App 做指定時間候位／順序候位；指定時間不等於保證有座位，建議出發前先用 App 查看。<a class="btn" target="_blank" rel="noopener" href="https://my.hama-sushi.co.jp/">HAMA NAVI 候位／指定時間預約 ↗</a> <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Hama+Sushi+Akihabara+Electric+Town+Exit">秋葉原 HAMA 壽司地圖 ↗</a></p>
 <p><strong>19:15 後返回住宿：</strong>從秋葉原搭 JR 總武線至錦糸町，再轉半藏門線至押上；以 Google Maps 當天路線為準。</p>
 <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=Tokyo+Cruise+Asakusa+Pier&destination=DiverCity+Tokyo+Plaza&travelmode=walking">淺草乘船場 → DiverCity 步行 ↗</a> <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=DiverCity+Tokyo+Plaza&destination=Akihabara+Station&travelmode=transit">DiverCity → 秋葉原 ↗</a> <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=Akihabara+Station&destination=Oshiage+Station&travelmode=transit">秋葉原 → 押上 ↗</a></article></div><div class="notice"><strong>預算提醒：</strong>方案 1 目前以你提供的 NT$1,823／人計算；方案 2、3 為自由行，交通、餐費與購物依實際支出。第二天三選一，團費請勿重複計入。</div></section>`}s.innerHTML=h;host.appendChild(s)});
-function val(id){return Math.max(0,Number(document.getElementById(id).value)||0)}function nt(v){return 'NT
-document.getElementById('updatefx').onclick=async()=>{let st=document.getElementById('fxstatus');st.textContent='匯率更新中…';try{let r=await fetch('https://api.frankfurter.app/latest?from=JPY&to=TWD');if(!r.ok)throw Error();let j=await r.json();document.getElementById('fx').value=Number(j.rates.TWD).toFixed(4);st.textContent='參考匯率更新至 '+j.date+'；刷卡匯率依銀行為準。';calc()}catch(e){st.textContent='暫時無法連線，請手動輸入匯率。'}};
-async function forecast(lat,lon,date,id){let el=document.getElementById(id),dt=new Date(date+'T12:00:00'),diff=Math.ceil((dt-new Date())/86400000);if(diff<0||diff>15){el.textContent='逐日預報尚未開放；請於出發前約 1–16 天再查看。';return}try{let u='https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lon+'&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo&start_date='+date+'&end_date='+date;let j=await(await fetch(u)).json(),code=j.daily.weather_code[0],desc=code===0?'晴朗':code<=3?'多雲':code<=48?'霧':code<=67?'雨':code<=77?'雪':code<=82?'陣雨':'雷雨';el.textContent=desc+'｜'+j.daily.temperature_2m_min[0]+'°C–'+j.daily.temperature_2m_max[0]+'°C（Open-Meteo 預報）'}catch(e){el.textContent='暫時無法取得預報，請稍後重試。'}}
+function val(id){const el=document.getElementById(id);return Math.max(0,Number(el&&el.value)||0)}
+function nt(v){return 'NT$'+Math.round(v).toLocaleString('zh-TW')}
+function calc(){
+ const adults=val('adults'),children=val('children'),fx=val('fx');
+ const flight=adults*val('flightAdult')+children*val('flightChild');
+ const stay=val('stayYen')*fx;
+ const transport=(adults*val('transportAdult')+children*val('transportChild'))*fx;
+ const meals=(adults*val('mealAdult')+children*val('mealChild'))*fx;
+ const shopping=(adults*val('shoppingAdult')+children*val('shoppingChild'))*fx;
+ const tour=val('tour'),extra=val('extra');
+ const total=flight+stay+transport+meals+shopping+tour+extra;
+ const people=adults+children;
+ document.getElementById('grand').textContent=nt(total);
+ document.getElementById('perperson').textContent=people?nt(total/people):'—';
+ document.getElementById('breakdown').innerHTML=
+  '<p>機票：'+nt(flight)+'</p>'+
+  '<p>住宿：'+nt(stay)+'</p>'+
+  '<p>交通：'+nt(transport)+'</p>'+
+  '<p>餐費：'+nt(meals)+'</p>'+
+  '<p>購物：'+nt(shopping)+'</p>'+
+  '<p>Klook 團費：'+nt(tour)+'</p>'+
+  '<p>其他費用：'+nt(extra)+'</p>';
+ const sd=document.getElementById('staydisplay');
+ if(sd)sd.innerHTML='¥'+Math.round(val('stayYen')).toLocaleString('ja-JP')+' <small>/ 全團住宿總額</small>';
+}
+const budgetIds=['adults','children','fx','flightAdult','flightChild','stayYen','transportAdult','transportChild','mealAdult','mealChild','shoppingAdult','shoppingChild','tour','extra'];
+budgetIds.forEach(id=>{const el=document.getElementById(id);if(el){el.addEventListener('input',calc);el.addEventListener('change',calc)}});
+document.getElementById('resetbudget').addEventListener('click',()=>{
+ const defaults={adults:8,children:1,fx:.22,flightAdult:29598,flightChild:29598,stayYen:255669,transportAdult:4941,transportChild:2470.5,mealAdult:10000,mealChild:5000,shoppingAdult:30000,shoppingChild:15000,tour:0,extra:0};
+ Object.entries(defaults).forEach(([id,v])=>document.getElementById(id).value=v);calc();
+});
+calc();
+document.getElementById('updatefx').onclick=async()=>{const st=document.getElementById('fxstatus');st.textContent='匯率更新中…';try{const r=await fetch('https://api.frankfurter.app/latest?from=JPY&to=TWD');if(!r.ok)throw Error();const j=await r.json();document.getElementById('fx').value=Number(j.rates.TWD).toFixed(4);st.textContent='參考匯率更新至 '+j.date+'；刷卡匯率依銀行為準。';calc()}catch(e){st.textContent='暫時無法連線，請手動輸入匯率。'}};
+async function forecast(lat,lon,date,id){const el=document.getElementById(id),dt=new Date(date+'T12:00:00'),diff=Math.ceil((dt-new Date())/86400000);if(diff<0||diff>15){el.textContent='逐日預報尚未開放；請於出發前約 1–16 天再查看。';return}try{const u='https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lon+'&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo&start_date='+date+'&end_date='+date;const j=await(await fetch(u)).json(),code=j.daily.weather_code[0],desc=code===0?'晴朗':code<=3?'多雲':code<=48?'霧':code<=67?'雨':code<=77?'雪':code<=82?'陣雨':'雷雨';el.textContent=desc+'｜'+j.daily.temperature_2m_min[0]+'°C–'+j.daily.temperature_2m_max[0]+'°C（Open-Meteo 預報）'}catch(e){el.textContent='暫時無法取得預報，請稍後重試。'}}
 const dates=['2027-01-22','2027-01-23','2027-01-24','2027-01-25','2027-01-26'];days.forEach((d,i)=>forecast(35.71,139.81,dates[i],'weather-'+d.id));forecast(35.24,138.78,'2027-01-24','fujiweather');forecast(35.71,139.81,'2027-01-25','tokyoweather');
-function checks(id,arr){let el=document.getElementById(id);arr.forEach((t,i)=>{let k='tokyo-'+id+'-'+i,l=document.createElement('label');l.className='check';l.innerHTML='<input type="checkbox"><span>'+t+'</span>';let c=l.querySelector('input');c.checked=localStorage.getItem(k)==='1';c.onchange=()=>localStorage.setItem(k,c.checked?'1':'0');el.appendChild(l)})}checks('checks1',['確認護照效期與機票姓名','完成 Visit Japan Web 入境資料','確認去回程航廈與報到時間','準備 Suica／交通 IC 卡','確認住宿入住方式與聯絡電話']);checks('checks2',['確認每人託運公斤數','行動電源與鋰電池隨身攜帶','準備雪衣、手套、保暖襪','準備日圓現金與信用卡','確認 Klook 集合點、憑證與團費']);
-</script></body></html>
+function checks(id,arr){const el=document.getElementById(id);arr.forEach((t,i)=>{const k='tokyo-'+id+'-'+i,l=document.createElement('label');l.className='check';l.innerHTML='<input type="checkbox"><span>'+t+'</span>';const box=l.querySelector('input');box.checked=localStorage.getItem(k)==='1';box.onchange=()=>localStorage.setItem(k,box.checked?'1':'0');el.appendChild(l)})}
+checks('checks1',['確認護照效期與機票姓名','完成 Visit Japan Web 入境資料','確認去回程航廈與報到時間','準備 Suica／交通 IC 卡','確認住宿入住方式與聯絡電話']);
+checks('checks2',['確認每人託運公斤數','行動電源與鋰電池隨身攜帶','準備雪衣、手套、保暖襪','準備日圓現金與信用卡','確認 Klook 集合點、憑證與團費']);</script></body></html>
